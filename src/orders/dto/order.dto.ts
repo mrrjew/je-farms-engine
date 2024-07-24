@@ -1,4 +1,9 @@
-import { IsNumber, IsArray, ArrayNotEmpty, ArrayMinSize } from 'class-validator';
+import {
+  IsNumber,
+  IsArray,
+  ArrayNotEmpty,
+  ArrayMinSize,
+} from 'class-validator';
 
 export class OrderDto {
   @IsNumber()
@@ -13,8 +18,5 @@ export class OrderDto {
   @IsNumber()
   readonly quantity: number;
 
-  readonly status:
-    | 'PENDING'
-    | 'PAID'
-    | 'CANCELLED'
+  readonly status: 'PENDING' | 'PAID' | 'CANCELLED';
 }

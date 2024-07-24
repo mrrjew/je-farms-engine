@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCartDto, AddProductDto } from './dto'; // Import your DTOs
 
@@ -53,32 +57,31 @@ export class CartService {
     return cartProduct;
   }
 
-  async removeProductFromCart(id:number){
-    try{
+  async removeProductFromCart(id: number) {
+    try {
       await this.prisma.cartProduct.delete({
-        where:{
-          id
-        }
-      })
+        where: {
+          id,
+        },
+      });
 
-      return `removed product ${id} from cart`
-    }catch(error){
-      throw new NotFoundException('Error removing product from cart')
+      return `removed product ${id} from cart`;
+    } catch (error) {
+      throw new NotFoundException('Error removing product from cart');
     }
   }
 
-  async removeCart(id:number){
-    try{
+  async removeCart(id: number) {
+    try {
       await this.prisma.cart.delete({
-        where:{
-          id
-        }
-      })
+        where: {
+          id,
+        },
+      });
 
-      return `removed cart ${id}`
-
-    }catch(error){
-      throw new NotFoundException('Error removing cart')
+      return `removed cart ${id}`;
+    } catch (error) {
+      throw new NotFoundException('Error removing cart');
     }
   }
   async getCart(id: number) {

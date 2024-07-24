@@ -27,23 +27,23 @@ export class ProductService {
   }
 
   async updateProduct(id: number, productDto: Partial<ProductDto>) {
-    const existingProduct = await this.getProductById(id); 
+    const existingProduct = await this.getProductById(id);
 
-    if(!existingProduct){
-        throw new NotFoundException(`Product with ID ${id} not found`)
+    if (!existingProduct) {
+      throw new NotFoundException(`Product with ID ${id} not found`);
     }
 
     return this.prismaService.product.update({
       where: { id },
-      data: {...productDto},
+      data: { ...productDto },
     });
   }
 
   async deleteProduct(id: number) {
-    const existingProduct = await this.getProductById(id); 
+    const existingProduct = await this.getProductById(id);
 
-    if(!existingProduct){
-        throw new NotFoundException(`Product with ID ${id} not found`)
+    if (!existingProduct) {
+      throw new NotFoundException(`Product with ID ${id} not found`);
     }
 
     return this.prismaService.product.delete({

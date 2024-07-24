@@ -1,8 +1,20 @@
-import { Body, Controller, Post, Get, Param, Put, ParseIntPipe, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Param,
+  ParseIntPipe,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { CartService } from './cart.service';
-import { CreateCartDto, AddProductDto} from './dto';
+import { CreateCartDto, AddProductDto } from './dto';
+
+import { JwtAuthGuard } from '../guards/auth.guard';
 
 @Controller('cart')
+@UseGuards(JwtAuthGuard)
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
@@ -17,12 +29,12 @@ export class CartController {
   }
 
   @Delete('remove-product/:id')
-  async removeProductFromCart(@Param('id', ParseIntPipe) id:number) {
+  async removeProductFromCart(@Param('id', ParseIntPipe) id: number) {
     return this.cartService.removeProductFromCart(id);
   }
 
   @Delete('remove/:id')
-  async removeCart(@Param('id', ParseIntPipe) id:number) {
+  async removeCart(@Param('id', ParseIntPipe) id: number) {
     return this.cartService.removeCart(id);
   }
 

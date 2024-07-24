@@ -6,100 +6,101 @@ import { OrderDto } from './dto/order.dto'; // Assuming this is the correct path
 export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getAllOrders(){
-    return this.prisma.order.findMany({include:{
-        user:{
-            select:{
-                id: true,
-                createdAt: true,
-                updatedAt: true,
-                email: true,
-                userName:true,
-                isAdmin:true
-            }
+  async getAllOrders() {
+    return this.prisma.order.findMany({
+      include: {
+        user: {
+          select: {
+            id: true,
+            createdAt: true,
+            updatedAt: true,
+            email: true,
+            userName: true,
+            isAdmin: true,
+          },
         },
-        products:true
-    }});
-  }
-
-  async getOrderById(id: number){
-    return this.prisma.order.findUnique({
-      where: { id },
-      include:{
-        user:{
-            select:{
-                id: true,
-                createdAt: true,
-                updatedAt: true,
-                email: true,
-                userName:true,
-                isAdmin:true
-            }
-        },
-        products:true
-      }
+        products: true,
+      },
     });
   }
 
-  async createOrder(orderDto: OrderDto){
-    const {userId,productIds,...otherFields} = orderDto
-
-    return this.prisma.order.create({
-        data: {
-          products:{
-              connect:productIds.map(productId => ({id:productId}))
+  async getOrderById(id: number) {
+    return this.prisma.order.findUnique({
+      where: { id },
+      include: {
+        user: {
+          select: {
+            id: true,
+            createdAt: true,
+            updatedAt: true,
+            email: true,
+            userName: true,
+            isAdmin: true,
           },
-          userId,
-          ...otherFields
         },
-        include:{
-            user:{
-                select:{
-                    id: true,
-                    createdAt: true,
-                    updatedAt: true,
-                    email: true,
-                    userName:true,
-                    isAdmin:true
-                }
-            },
-          products:true
-        }
-      });;
+        products: true,
+      },
+    });
   }
 
-  async updateOrder(id: number, orderDto: Partial<OrderDto>){
-    
-    const {userId,productIds,...otherFields} = orderDto
+  async createOrder(orderDto: OrderDto) {
+    const { userId, productIds, ...otherFields } = orderDto;
+
+    return this.prisma.order.create({
+      data: {
+        products: {
+          connect: productIds.map((productId) => ({ id: productId })),
+        },
+        userId,
+        ...otherFields,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            createdAt: true,
+            updatedAt: true,
+            email: true,
+            userName: true,
+            isAdmin: true,
+          },
+        },
+        products: true,
+      },
+    });
+  }
+
+  async updateOrder(id: number, orderDto: Partial<OrderDto>) {
+    const { userId, productIds, ...otherFields } = orderDto;
 
     return this.prisma.order.update({
       where: { id },
       data: {
-        products:{
-            connect:productIds?.map(productId => ({id:productId}))
+        products: {
+          connect: productIds?.map((productId) => ({ id: productId })),
         },
         userId,
-        ...otherFields
+        ...otherFields,
       },
-      include:{
-        user:{
-            select:{
-                id: true,
-                createdAt: true,
-                updatedAt: true,
-                email: true,
-                userName:true,
-                isAdmin:true
-            }
+      include: {
+        user: {
+          select: {
+            id: true,
+            createdAt: true,
+            updatedAt: true,
+            email: true,
+            userName: true,
+            isAdmin: true,
+          },
         },
-        products:true
-      }
+        products: true,
+      },
     });
   }
 
-  async deleteOrder(id: number){
+  async deleteOrder(id: number) {
     return this.prisma.order.delete({
-      where: { id }
+      where: { id },
     });
   }
 }
