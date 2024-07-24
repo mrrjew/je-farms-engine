@@ -1,20 +1,18 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
-import { JwtModule } from '@nestjs/jwt';
 import { JwtMiddleWare } from './middleware/auth.middleware';
 import { OrderModule } from './orders/order.module';
+import { CartModule } from './cart/cart.module';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [
-    JwtModule.register({
-    secret:"jefarms",
-    signOptions:{expiresIn:process.env.JWT_EXPIRY}
-  }),
-    AuthModule,ProductModule,OrderModule],
+    AuthModule,ProductModule,OrderModule,CartModule],
+    providers:[PrismaService]
 })
 export class AppModule {
   configure(consumer:MiddlewareConsumer){
-    consumer.apply(JwtMiddleWare).forRoutes('*')
+    consumer.apply(JwtMiddleWare).forRoutes({path:'*', method:RequestMethod.ALL})
   }
 }
