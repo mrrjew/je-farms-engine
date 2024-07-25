@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto';
 import { Request } from 'express';
@@ -9,7 +9,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Get('profile')
-  @UseGuard(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   profile(@Req() req: Request) {
     const user = req['user'];
     return user;
@@ -25,7 +25,5 @@ export class AuthController {
     return this.authService.signin(dto);
   }
 }
-function UseGuard(AuthGuard: any): (target: AuthController, propertyKey: "profile", descriptor: TypedPropertyDescriptor<(req: Request) => Express.User>) => void | TypedPropertyDescriptor<...> {
-  throw new Error('Function not implemented.');
-}
+
 
