@@ -9,9 +9,8 @@ export class PaymentController {
   constructor(private paymentService: PaymentService) {}
 
   @Post('initialize')
-  initializePayment(@Body() dto: PaymentDto,@Req() req:Request) {
-
-    return this.paymentService.initializeTransaction(dto,req["user"].email);
+  initializePayment(@Body() dto: PaymentDto, @Req() req: Request) {
+    return this.paymentService.initializeTransaction(dto, req['user'].email);
   }
 
   @Post('verify/:reference')

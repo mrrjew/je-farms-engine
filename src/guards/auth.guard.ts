@@ -1,4 +1,9 @@
-import { Injectable, CanActivate, ExecutionContext, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as jwt from 'jsonwebtoken';
 
@@ -16,7 +21,9 @@ export class JwtAuthGuard implements CanActivate {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      throw new BadRequestException('Authorization header missing or malformed');
+      throw new BadRequestException(
+        'Authorization header missing or malformed',
+      );
     }
 
     const token = authHeader.split(' ')[1];

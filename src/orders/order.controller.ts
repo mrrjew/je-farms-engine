@@ -16,7 +16,6 @@ import { OrderService } from './order.service';
 import { JwtAuthGuard } from '../guards/auth.guard';
 
 @Controller('order')
-
 @UseGuards(JwtAuthGuard)
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
