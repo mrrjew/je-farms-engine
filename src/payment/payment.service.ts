@@ -54,7 +54,7 @@ export class PaymentService {
       });
 
       console.log(response.data);
-      return response.data.authorization_url; // Return the authorization URL for redirection
+      return response.data; // Return the authorization URL for redirection
     } catch (error) {
       throw new InternalServerErrorException(
         `Paystack initialization error: ${error}`,
