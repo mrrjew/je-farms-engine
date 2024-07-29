@@ -6,9 +6,12 @@ import {
   InternalServerErrorException,
   // NotFoundException,
   UnauthorizedException,
+Injectable
 } from '@nestjs/common';
 
 const paystack = new Paystack(process.env.PAYSTACK_API_KEY);
+
+@Injectable()
 export class PaymentService {
   constructor(private readonly prisma: PrismaService) {}
 
@@ -29,16 +32,16 @@ export class PaymentService {
       }
 
       //Check if order exists
-      // console.log(orderId);
-      // const order = this.prisma?.order.findUnique({
-      //   where: {
-      //     id: +orderId,
-      //   },
-      // });
+      console.log(orderId);
+      const order = this.prisma?.order.findUnique({
+       where: {
+           id: +orderId,
+        },
+       });
 
-      // if (!order) {
-      //   throw new NotFoundException('Order does not exist');
-      // }
+      if (!order) {
+        throw new NotFoundException('Order does not exist');
+      }
 
       const reference = uuidv4(); // Generate a unique reference for each transaction
       const response = await paystack.transaction.initialize({
