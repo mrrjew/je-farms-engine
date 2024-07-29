@@ -15,7 +15,7 @@ export class PaymentService {
   async initializeTransaction(
     dto: PaymentDto,
     thisUser: string,
-  ): Promise<string | null> {
+  ){
     try {
       const { email, amount, orderId } = dto;
 
