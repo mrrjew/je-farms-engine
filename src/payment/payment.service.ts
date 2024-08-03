@@ -34,10 +34,10 @@ export class PaymentService {
       //Check if order exists
       console.log(orderId);
       const order = this.prisma?.order.findUnique({
-        where: {
-          id: +orderId,
+       where: {
+           id: +orderId,
         },
-      });
+       });
 
       if (!order) {
         throw new NotFoundException('Order does not exist');
@@ -57,7 +57,7 @@ export class PaymentService {
       });
 
       console.log(response.data);
-      return response.data;
+      return response.data; // Return the authorization URL for redirection
     } catch (error) {
       throw new InternalServerErrorException(
         `Paystack initialization error: ${error}`,
