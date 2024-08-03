@@ -3,19 +3,22 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { v4 as uuidv4 } from 'uuid';
 import { PaymentDto } from './dto/payment.dto';
 import {
+  Injectable,
   InternalServerErrorException,
-  // NotFoundException,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 
 const paystack = new Paystack(process.env.PAYSTACK_API_KEY);
+
+@Injectable()
 export class PaymentService {
   constructor(private readonly prisma: PrismaService) {}
 
   async initializeTransaction(
     dto: PaymentDto,
     thisUser: string,
-  ): Promise<string | null> {
+  ){
     try {
       const { email, amount, orderId } = dto;
 
@@ -29,16 +32,16 @@ export class PaymentService {
       }
 
       //Check if order exists
-      // console.log(orderId);
-      // const order = this.prisma?.order.findUnique({
-      //   where: {
-      //     id: +orderId,
-      //   },
-      // });
+      console.log(orderId);
+      const order = this.prisma?.order.findUnique({
+        where: {
+          id: +orderId,
+        },
+      });
 
-      // if (!order) {
-      //   throw new NotFoundException('Order does not exist');
-      // }
+      if (!order) {
+        throw new NotFoundException('Order does not exist');
+      }
 
       const reference = uuidv4(); // Generate a unique reference for each transaction
       const response = await paystack.transaction.initialize({
@@ -54,7 +57,7 @@ export class PaymentService {
       });
 
       console.log(response.data);
-      return response.data.authorization_url; // Return the authorization URL for redirection
+      return response.data;
     } catch (error) {
       throw new InternalServerErrorException(
         `Paystack initialization error: ${error}`,
@@ -71,6 +74,19 @@ export class PaymentService {
       if (response.data.status === 'success') {
         // Update the corresponding order in database
         const orderId = response.data.metadata.orderId;
+
+        //Check if order exists
+      console.log(orderId);
+      const order = this.prisma?.order.findUnique({
+        where: {
+          id: +orderId,
+        },
+      });
+
+      if (!order) {
+        throw new NotFoundException('Order does not exist');
+      }
+
         this.prisma?.order.update({
           where: {
             id: +orderId,
