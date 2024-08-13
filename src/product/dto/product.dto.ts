@@ -10,6 +10,14 @@ export class ProductDto {
   @IsNotEmpty()
   @IsString()
   readonly name: string;
+  
+  @IsNotEmpty()
+  @IsString()
+  readonly href: string;
+  
+  @IsNotEmpty()
+  @IsString()
+  readonly alt: string;
 
   @IsOptional()
   @IsString()
