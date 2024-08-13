@@ -36,7 +36,6 @@ model Product {
 
   name        String
   href        String @default("")
-  alt        String  @default("product")
   description String?
   price       Float
   stock       Int

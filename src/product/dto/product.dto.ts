@@ -14,9 +14,6 @@ export class ProductDto {
   @IsNotEmpty()
   @IsString()
   readonly href: string;
-  
-  @IsString()
-  readonly alt: string;
 
   @IsOptional()
   @IsString()
