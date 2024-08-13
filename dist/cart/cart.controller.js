@@ -36,6 +36,9 @@ let CartController = class CartController {
     async getCart(id) {
         return this.cartService.getCart(id);
     }
+    async getAllCart() {
+        return this.cartService.getAllCart();
+    }
 };
 exports.CartController = CartController;
 __decorate([
@@ -73,6 +76,12 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], CartController.prototype, "getCart", null);
+__decorate([
+    (0, common_1.Get)('all'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CartController.prototype, "getAllCart", null);
 exports.CartController = CartController = __decorate([
     (0, common_1.Controller)('cart'),
     (0, common_1.UseGuards)(auth_guard_1.JwtAuthGuard),

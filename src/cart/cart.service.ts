@@ -96,4 +96,16 @@ export class CartService {
 
     return cart;
   }
+
+  async getAllCart() {
+    const cart = await this.prisma.cart.findMany({
+      include: { cartProducts: { include: { product: true } } },
+    });
+
+    if (!cart) {
+      throw new NotFoundException('Cart not found');
+    }
+
+    return cart;
+  }
 }

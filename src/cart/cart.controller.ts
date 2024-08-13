@@ -42,4 +42,8 @@ export class CartController {
   async getCart(@Param('id', ParseIntPipe) id: number) {
     return this.cartService.getCart(id);
   }
+  @Get('all')
+  async getAllCart() {
+    return this.cartService.getAllCart();
+  }
 }
