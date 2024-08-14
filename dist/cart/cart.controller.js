@@ -27,8 +27,8 @@ let CartController = class CartController {
     async addProductToCart(addProductDto) {
         return this.cartService.addProductToCart(addProductDto);
     }
-    async removeProductFromCart(id) {
-        return this.cartService.removeProductFromCart(id);
+    async removeProductFromCart(cartId, productId) {
+        return this.cartService.removeProductFromCart(cartId, productId);
     }
     async removeCart(id) {
         return this.cartService.removeCart(id);
@@ -56,10 +56,11 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CartController.prototype, "addProductToCart", null);
 __decorate([
-    (0, common_1.Delete)('remove-product/:id'),
-    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    (0, common_1.Delete)('remove-product/:cartId/:productId'),
+    __param(0, (0, common_1.Param)('cartId', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Param)('productId', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
 ], CartController.prototype, "removeProductFromCart", null);
 __decorate([

@@ -52,24 +52,29 @@ export class CartService {
         quantity,
         price,
       },
+      include:{product:true},
     });
 
     return cartProduct;
   }
 
-  async removeProductFromCart(id: number) {
+  async removeProductFromCart(cartId: number, productId: number) {
     try {
       await this.prisma.cartProduct.delete({
         where: {
-          id,
+          cartId_productId: {
+            cartId,
+            productId
+          },
         },
       });
-
-      return `removed product ${id} from cart`;
+  
+      return `Removed product ${productId} from cart ${cartId}`;
     } catch (error) {
       throw new NotFoundException('Error removing product from cart');
     }
   }
+  
 
   async removeCart(id: number) {
     try {

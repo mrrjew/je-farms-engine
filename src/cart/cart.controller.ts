@@ -28,9 +28,12 @@ export class CartController {
     return this.cartService.addProductToCart(addProductDto);
   }
 
-  @Delete('remove-product/:id')
-  async removeProductFromCart(@Param('id', ParseIntPipe) id: number) {
-    return this.cartService.removeProductFromCart(id);
+  @Delete('remove-product/:cartId/:productId')
+  async removeProductFromCart(
+    @Param('cartId', ParseIntPipe) cartId: number,
+    @Param('productId', ParseIntPipe) productId: number
+  ) {
+    return this.cartService.removeProductFromCart(cartId, productId);
   }
 
   @Delete('remove/:id')

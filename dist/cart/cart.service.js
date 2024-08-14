@@ -46,17 +46,21 @@ let CartService = class CartService {
                 quantity,
                 price,
             },
+            include: { product: true },
         });
         return cartProduct;
     }
-    async removeProductFromCart(id) {
+    async removeProductFromCart(cartId, productId) {
         try {
             await this.prisma.cartProduct.delete({
                 where: {
-                    id,
+                    cartId_productId: {
+                        cartId,
+                        productId
+                    },
                 },
             });
-            return `removed product ${id} from cart`;
+            return `Removed product ${productId} from cart ${cartId}`;
         }
         catch (error) {
             throw new common_1.NotFoundException('Error removing product from cart');

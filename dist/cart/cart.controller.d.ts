@@ -10,13 +10,25 @@ export declare class CartController {
         productId: number | null;
     }>;
     addProductToCart(addProductDto: AddProductDto): Promise<{
+        product: {
+            id: number;
+            createdAt: Date;
+            updatedAt: Date;
+            name: string;
+            href: string;
+            alt: string;
+            description: string | null;
+            price: number;
+            stock: number;
+        };
+    } & {
         id: number;
         cartId: number;
         productId: number;
         quantity: number;
         price: number;
     }>;
-    removeProductFromCart(id: number): Promise<string>;
+    removeProductFromCart(cartId: number, productId: number): Promise<string>;
     removeCart(id: number): Promise<string>;
     getCart(id: number): Promise<{
         cartProducts: ({
