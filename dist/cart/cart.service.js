@@ -16,15 +16,6 @@ let CartService = class CartService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async createCart(createCartDto) {
-        const { userId } = createCartDto;
-        const cart = await this.prisma.cart.create({
-            data: {
-                userId,
-            },
-        });
-        return cart;
-    }
     async addProductToCart(addProductDto) {
         const { cartId, productId, quantity, price } = addProductDto;
         const cart = await this.prisma.cart.findUnique({

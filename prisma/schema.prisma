@@ -19,10 +19,11 @@ model User {
   userName String?
   hash     String
   isAdmin  Boolean @default(false)
+  cartId   Int?
+  cart     Cart?    @relation(fields: [cartId], references: [id])
 
   // Define relationships
   orders   Order[] // A user can have multiple orders
-  carts    Cart[] // A user can have multiple carts
   payments Payment[] // A user can have multiple payments
 
   @@map("users")
@@ -35,7 +36,7 @@ model Product {
   updatedAt DateTime @updatedAt()
 
   name        String
-  href        String @default("")
+  href        String  @default("")
   description String?
   price       Float
   stock       Int
@@ -75,10 +76,10 @@ model Cart {
   id           Int           @id @default(autoincrement())
   createdAt    DateTime      @default(now())
   userId       Int
-  user         User          @relation(fields: [userId], references: [id])
   cartProducts CartProduct[]
   Product      Product?      @relation(fields: [productId], references: [id])
   productId    Int?
+  User         User[]
 }
 
 model CartProduct {

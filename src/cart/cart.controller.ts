@@ -18,11 +18,6 @@ import { JwtAuthGuard } from '../guards/auth.guard';
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  @Post('create')
-  async createCart(@Body() createCartDto: CreateCartDto) {
-    return this.cartService.createCart(createCartDto);
-  }
-
   @Post('add-product')
   async addProductToCart(@Body() addProductDto: AddProductDto) {
     return this.cartService.addProductToCart(addProductDto);

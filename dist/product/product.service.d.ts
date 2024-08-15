@@ -9,7 +9,6 @@ export declare class ProductService {
         updatedAt: Date;
         name: string;
         href: string;
-        alt: string;
         description: string | null;
         price: number;
         stock: number;
@@ -20,7 +19,6 @@ export declare class ProductService {
         updatedAt: Date;
         name: string;
         href: string;
-        alt: string;
         description: string | null;
         price: number;
         stock: number;
@@ -31,7 +29,6 @@ export declare class ProductService {
         updatedAt: Date;
         name: string;
         href: string;
-        alt: string;
         description: string | null;
         price: number;
         stock: number;
@@ -42,7 +39,6 @@ export declare class ProductService {
         updatedAt: Date;
         name: string;
         href: string;
-        alt: string;
         description: string | null;
         price: number;
         stock: number;
@@ -53,7 +49,6 @@ export declare class ProductService {
         updatedAt: Date;
         name: string;
         href: string;
-        alt: string;
         description: string | null;
         price: number;
         stock: number;

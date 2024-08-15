@@ -21,9 +21,6 @@ let CartController = class CartController {
     constructor(cartService) {
         this.cartService = cartService;
     }
-    async createCart(createCartDto) {
-        return this.cartService.createCart(createCartDto);
-    }
     async addProductToCart(addProductDto) {
         return this.cartService.addProductToCart(addProductDto);
     }
@@ -41,13 +38,6 @@ let CartController = class CartController {
     }
 };
 exports.CartController = CartController;
-__decorate([
-    (0, common_1.Post)('create'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_1.CreateCartDto]),
-    __metadata("design:returntype", Promise)
-], CartController.prototype, "createCart", null);
 __decorate([
     (0, common_1.Post)('add-product'),
     __param(0, (0, common_1.Body)()),

@@ -1,14 +1,8 @@
 import { CartService } from './cart.service';
-import { CreateCartDto, AddProductDto } from './dto';
+import { AddProductDto } from './dto';
 export declare class CartController {
     private readonly cartService;
     constructor(cartService: CartService);
-    createCart(createCartDto: CreateCartDto): Promise<{
-        id: number;
-        createdAt: Date;
-        userId: number;
-        productId: number | null;
-    }>;
     addProductToCart(addProductDto: AddProductDto): Promise<{
         product: {
             id: number;
@@ -16,7 +10,6 @@ export declare class CartController {
             updatedAt: Date;
             name: string;
             href: string;
-            alt: string;
             description: string | null;
             price: number;
             stock: number;
@@ -38,7 +31,6 @@ export declare class CartController {
                 updatedAt: Date;
                 name: string;
                 href: string;
-                alt: string;
                 description: string | null;
                 price: number;
                 stock: number;
@@ -64,7 +56,6 @@ export declare class CartController {
                 updatedAt: Date;
                 name: string;
                 href: string;
-                alt: string;
                 description: string | null;
                 price: number;
                 stock: number;

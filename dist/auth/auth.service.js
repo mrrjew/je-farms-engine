@@ -29,6 +29,12 @@ let AuthService = class AuthService {
                 },
             });
             delete user.hash;
+            const cart = await this.prismaService.cart.create({
+                data: {
+                    userId: user.id
+                }
+            });
+            console.log(cart);
             const token = jwt.sign(user, process.env.JWT_SECRET, {
                 expiresIn: process.env.JWT_EXPIRY,
             });

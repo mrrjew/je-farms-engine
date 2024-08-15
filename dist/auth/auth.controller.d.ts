@@ -14,6 +14,7 @@ export declare class AuthController {
         userName: string | null;
         hash: string;
         isAdmin: boolean;
+        cartId: number | null;
     }>;
     signin(dto: AuthDto): Promise<{
         token: string;
@@ -24,5 +25,6 @@ export declare class AuthController {
         userName: string | null;
         hash: string;
         isAdmin: boolean;
+        cartId: number | null;
     }>;
 }

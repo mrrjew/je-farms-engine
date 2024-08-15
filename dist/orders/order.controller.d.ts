@@ -18,7 +18,6 @@ export declare class OrderController {
             updatedAt: Date;
             name: string;
             href: string;
-            alt: string;
             description: string | null;
             price: number;
             stock: number;
@@ -45,7 +44,6 @@ export declare class OrderController {
             updatedAt: Date;
             name: string;
             href: string;
-            alt: string;
             description: string | null;
             price: number;
             stock: number;
@@ -72,7 +70,6 @@ export declare class OrderController {
             updatedAt: Date;
             name: string;
             href: string;
-            alt: string;
             description: string | null;
             price: number;
             stock: number;
@@ -99,7 +96,6 @@ export declare class OrderController {
             updatedAt: Date;
             name: string;
             href: string;
-            alt: string;
             description: string | null;
             price: number;
             stock: number;

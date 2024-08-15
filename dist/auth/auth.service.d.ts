@@ -12,6 +12,7 @@ export declare class AuthService {
         userName: string | null;
         hash: string;
         isAdmin: boolean;
+        cartId: number | null;
     }>;
     signin(dto: AuthDto): Promise<{
         token: string;
@@ -22,5 +23,6 @@ export declare class AuthService {
         userName: string | null;
         hash: string;
         isAdmin: boolean;
+        cartId: number | null;
     }>;
 }

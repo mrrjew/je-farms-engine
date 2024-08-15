@@ -10,19 +10,6 @@ import { CreateCartDto, AddProductDto } from './dto'; // Import your DTOs
 export class CartService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async createCart(createCartDto: CreateCartDto) {
-    const { userId } = createCartDto;
-
-    // Create a new cart for the user
-    const cart = await this.prisma.cart.create({
-      data: {
-        userId,
-      },
-    });
-
-    return cart;
-  }
-
   async addProductToCart(addProductDto: AddProductDto) {
     const { cartId, productId, quantity, price } = addProductDto;
 

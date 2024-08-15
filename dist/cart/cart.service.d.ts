@@ -1,14 +1,8 @@
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateCartDto, AddProductDto } from './dto';
+import { AddProductDto } from './dto';
 export declare class CartService {
     private readonly prisma;
     constructor(prisma: PrismaService);
-    createCart(createCartDto: CreateCartDto): Promise<{
-        id: number;
-        createdAt: Date;
-        userId: number;
-        productId: number | null;
-    }>;
     addProductToCart(addProductDto: AddProductDto): Promise<{
         product: {
             id: number;
@@ -16,7 +10,6 @@ export declare class CartService {
             updatedAt: Date;
             name: string;
             href: string;
-            alt: string;
             description: string | null;
             price: number;
             stock: number;
@@ -38,7 +31,6 @@ export declare class CartService {
                 updatedAt: Date;
                 name: string;
                 href: string;
-                alt: string;
                 description: string | null;
                 price: number;
                 stock: number;
@@ -64,7 +56,6 @@ export declare class CartService {
                 updatedAt: Date;
                 name: string;
                 href: string;
-                alt: string;
                 description: string | null;
                 price: number;
                 stock: number;
