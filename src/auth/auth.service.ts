@@ -15,8 +15,9 @@ export class AuthService {
 
       const user = await this.prismaService.user.create({
         data: {
+          ...dto,
           email: dto.email,
-          hash,
+          hash
         },
       });
 
@@ -29,7 +30,7 @@ export class AuthService {
       })
 
       console.log(cart)
-      
+
       const token = jwt.sign(user, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRY,
       });

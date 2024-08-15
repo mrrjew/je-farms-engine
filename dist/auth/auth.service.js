@@ -24,8 +24,9 @@ let AuthService = class AuthService {
             const hash = await argon2.hash(dto.password);
             const user = await this.prismaService.user.create({
                 data: {
+                    ...dto,
                     email: dto.email,
-                    hash,
+                    hash
                 },
             });
             delete user.hash;
