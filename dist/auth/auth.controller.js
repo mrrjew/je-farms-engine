@@ -22,8 +22,14 @@ let AuthController = class AuthController {
         this.authService = authService;
     }
     profile(req) {
-        const user = req['user'];
-        return user;
+        try {
+            const user = req['user'];
+            console.log(user);
+            return user;
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
     signup(dto) {
         return this.authService.signup(dto);

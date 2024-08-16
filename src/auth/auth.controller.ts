@@ -11,8 +11,13 @@ export class AuthController {
   @Get('profile')
   @UseGuards(JwtAuthGuard)
   profile(@Req() req: Request) {
-    const user = req['user'];
+    try{
+      const user = req['user'];
+    console.log(user)
     return user;
+    }catch(error){
+      console.log(error)
+    }
   }
 
   @Post('signup')
