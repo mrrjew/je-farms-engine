@@ -21,10 +21,11 @@ let AuthService = class AuthService {
     }
     async signup(dto) {
         try {
-            const hash = await argon2.hash(dto.password);
+            const { password, email, ...otherFields } = dto;
+            const hash = await argon2.hash(password);
             const user = await this.prismaService.user.create({
                 data: {
-                    ...dto,
+                    ...otherFields,
                     email: dto.email,
                     hash
                 },
