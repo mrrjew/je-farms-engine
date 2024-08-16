@@ -37,10 +37,16 @@ let AuthService = class AuthService {
                 }
             });
             console.log(cart);
-            const token = jwt.sign(user, process.env.JWT_SECRET, {
+            const finalUser = await this.prismaService.user.update({
+                where: {
+                    id: user.id
+                }, data: { cartId: cart.id }
+            });
+            const token = jwt.sign(finalUser, process.env.JWT_SECRET, {
                 expiresIn: process.env.JWT_EXPIRY,
             });
-            const _user = { ...user, token };
+            const _user = { ...finalUser, token };
+            console.log(_user);
             return _user;
         }
         catch (error) {

@@ -24,8 +24,10 @@ let JwtAuthGuard = class JwtAuthGuard {
             throw new common_1.BadRequestException('Authorization header missing or malformed');
         }
         const token = authHeader.split(' ')[1];
+        console.log(token);
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            console.log("decoded", decoded);
             const user = await this.prisma.user.findUnique({
                 where: {
                     id: decoded.id,
@@ -39,6 +41,7 @@ let JwtAuthGuard = class JwtAuthGuard {
             return true;
         }
         catch (error) {
+            console.log(error);
             throw new common_1.BadRequestException('The token is faulty');
         }
     }

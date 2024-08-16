@@ -27,9 +27,11 @@ export class JwtAuthGuard implements CanActivate {
     }
 
     const token = authHeader.split(' ')[1];
-
+    console.log(token)
+    
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET) as IJwt;
+      console.log("decoded",decoded)
       const user = await this.prisma.user.findUnique({
         where: {
           id: decoded.id,
@@ -45,6 +47,7 @@ export class JwtAuthGuard implements CanActivate {
       req.user = user; // Attach user object to the request for downstream handlers/controllers
       return true;
     } catch (error) {
+      console.log(error)
       throw new BadRequestException('The token is faulty');
     }
   }
